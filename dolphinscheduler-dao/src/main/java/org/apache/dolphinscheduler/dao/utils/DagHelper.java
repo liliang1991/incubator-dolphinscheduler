@@ -276,12 +276,14 @@ public class DagHelper {
         }
         for (String dependNodeName : dependList) {
             TaskNode dependNode = dag.getNode(dependNodeName);
-            if (completeTaskList.containsKey(dependNodeName)
-                    || dependNode.isForbidden()
-                    || skipTaskNodeList.containsKey(dependNodeName)) {
-                continue;
-            } else {
-                return false;
+            if (dependNode != null) {
+                if (completeTaskList.containsKey(dependNodeName)
+                        || dependNode.isForbidden()
+                        || skipTaskNodeList.containsKey(dependNodeName)) {
+                    continue;
+                } else {
+                    return false;
+                }
             }
         }
         return true;
